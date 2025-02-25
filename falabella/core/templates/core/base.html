@@ -1,42 +1,91 @@
 <doctype html>
-    <html>
-      <head>
-        {% load static %}
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-        <script src="https://cdn.tailwingcss.com"></script>
-        <meta name="description" content="Falabella Colombia">
-        <title>{% block title %}{% endblock %}</title>
-      </head>
-      <body>
-    
-        <!-- Main container -->
-        <div class="container-fluid">
-            
-          <!-- Navbar Homecenter / Linio -->
-            <nav class="py-6 flex justify-between items-center border-b border-gray-200">
-              <div class="btn btn-group">
-                <a href="#" aria-current="page" class="h-10 object-contain px-2">
-                  <img src="{% static 'img/falIconButton.png' %}" alt="Falabella Icon" width="90" height="15">
-                </a>
-                <a href="https://homecenter.falabella.com.co/homecenter-co" class="h-20 object-contain px-2">
-                  <img src="{% static 'img/homIconButton.png' %}" alt="Homecenter Icon" width="115" height="10">
-                </a>
-                <a href="https://linio.falabella.com.co/linio-co" class="h-0 object-contain px-2">
-                  <img src="{% static 'img/linIconButton.png' %}" alt="Linio Icon" width="50" height="30">
-                </a>
-              </div>
-          </nav>
-    
-          <!-- Navbar -->
-          <!-- Content -->
-          {% block content %}
-          {% endblock%}
-
-        </div>
-    
+  <html>
+    <head>
+      {% load static %}
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+      <script src="https://cdn.tailwindcss.com"></script>
+      <meta name="description" content="Falabella Colombia">
+      <title>{% block title %}{% endblock %}</title>
+    </head>
+    <body>
+  
+      <!-- Main container -->
+      <div class="container-fluid">
+          
+        <!-- Navbar Homecenter / Linio -->
+          <nav class="flex justify-between items-center border-b border-gray-200">
+            <div class="btn btn-group">
+              <a href="#" aria-current="page" class="py-3  object-contain px-2">
+                <img src="{% static 'img/falIconButton.png' %}" alt="Falabella Icon" width="90" height="15">
+              </a>
+              <a href="https://homecenter.falabella.com.co/homecenter-co" class="py-3 object-contain px-2">
+                <img src="{% static 'img/homIconButton.png' %}" alt="Homecenter Icon" width="115" height="10">
+              </a>
+              <a href="https://linio.falabella.com.co/linio-co" class="py-1 object-contain px-2">
+                <img src="{% static 'img/linIconButton.png' %}" alt="Linio Icon" width="50" height="30">
+              </a>
+            </div>
+        </nav>
+  
+        <!-- Main Navbar -->
+        <nav class="navbar border-bottom border-gray-200 d-flex align-items-center justify-content-between px-3 py-2">
+          <!-- Logo + Menu -->
+          <div class="d-flex align-items-center">
+            <!-- Logo -->
+            <div class="me-3">
+              <img src="{% static 'img/falLogo.png' %}" alt="Falabella Icon" width="150" height="50">
+            </div>
+            <!-- Dropdown -->
+            <div class="dropdown">
+              <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Menú
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </div>
+          </div>
         
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-      </body>
-    </html>
+          <!-- Search bar -->
+          <div class="flex-grow-1 mx-4">
+            <div class="input-group">
+              <input
+                class="form-control rounded-pill py-2 bg-transparent"
+                type="search"
+                placeholder="Buscar en falabella.com"
+                aria-label="Search"
+              >
+              <span
+              class="position-absolute top-50 end-0 translate-middle-y me-2 bg-secondary rounded-circle"
+              style="width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">
+              <i class="bi bi-search text-white"></i>
+              </span>
+            </div>
+          </div>
+        
+          <!-- Links -->
+          <div class="d-flex align-items-center">     
+            <a href="#" class="mx-2 text-decoration-none">Login</a>
+            <a href="#" class="mx-2 text-decoration-none">Bought</a>
+            <a href="#" class="mx-2 text-decoration-none">Liked</a>
+            <a href="#" class="mx-2 text-decoration-none">🛒</a> 
+          </div>
+        </nav>
+        
+        <!-- Last Navbar --> 
+
+        <!-- Content -->
+        {% block content %}
+        
+        {% endblock%}
+
+      </div>
+  
+      
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    </body>
+  </html>
