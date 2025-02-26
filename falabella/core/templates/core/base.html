@@ -30,6 +30,7 @@
         </nav>
   
         <!-- Main Navbar -->
+        <!-- Main Navbar -->
         <nav class="navbar border-bottom border-gray-200 d-flex align-items-center justify-content-between px-3 py-2">
           <!-- Logo + Menu -->
           <div class="d-flex align-items-center">
@@ -39,7 +40,7 @@
             </div>
             <!-- Dropdown -->
             <div class="dropdown">
-              <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="btn dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Menú
               </a>
               <ul class="dropdown-menu">
@@ -68,13 +69,56 @@
           </div>
         
           <!-- Links -->
-          <div class="d-flex align-items-center">     
-            <a href="#" class="mx-2 text-decoration-none">Login</a>
-            <a href="#" class="mx-2 text-decoration-none">Bought</a>
-            <a href="#" class="mx-2 text-decoration-none">Liked</a>
-            <a href="#" class="mx-2 text-decoration-none">🛒</a> 
-          </div>
-        </nav>
+          <nav class="navbar p-2">
+            <div class="container-fluid d-flex align-items-center justify-content-between">
+              <!-- Login -->
+              <div class="d-flex flex-column align-items-start">
+                <span class="text-dark mb-0">Hola,</span>
+                <div class="dropdown align-items-start">
+                  <button class="btn dropdown-toggle p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <strong class="text-dark">Inicia sesión</strong>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Action two</a></li>
+                    <li><a class="dropdown-item" href="#">Action three</a></li>
+                  </ul>
+                </div>
+              </div>
+            
+              <!-- Divider -->
+              <div class="vr mx-3"></div>
+              <!-- Mis compras -->
+              <div class="d-flex align-items-center">
+                <div class="d-flex flex-column" style="line-height: 1;">
+                  <span class="text-dark">Mis</span>
+                  <span class="text-dark fw-bold">compras</span>
+                </div>
+
+              <!-- Divider -->
+              <div class="vr mx-3"></div>
+
+              <!-- Liked -->
+              <a href="#">
+                <i class="bi bi-heart text-dark fs-4"></i>
+              </a>
+              
+
+              <!-- Divider -->
+              <div class="vr mx-3"></div>
+
+              <!-- Cart -->
+              <div class="position-relative me-3">
+                <a href="#" class="text-decoration-none">
+                  <i class="bi bi-cart3 text-dark fs-4"></i>
+                </a>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark">
+                  0
+                </span>
+              </div>
+              </div>
+            </div>
+          </nav>
         
         <!-- Last Navbar --> 
 
