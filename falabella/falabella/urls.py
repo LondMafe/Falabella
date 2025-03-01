@@ -18,9 +18,11 @@ from django.contrib import admin
 from django.urls import path
 
 from core.views import index, help
+from django.urls import include
 
 urlpatterns = [
     path('', index, name='falabella-co'),
     path('help/', help, name="help"),
     path('admin/', admin.site.urls),
+    path('api/', include('users.urls')),
 ]
