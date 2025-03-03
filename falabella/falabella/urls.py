@@ -21,11 +21,23 @@ from core.views import index, help
 from django.urls import include
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
+from django.conf import settings
+from django.conf.urls.static import static
+from django.views.generic import RedirectView
+
+
 urlpatterns = [
     path('', index, name='falabella-co'),
     path('help/', help, name="help"),
     path('admin/', admin.site.urls),
     path('api/', include('users.urls')),
+<<<<<<< HEAD
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),#Ruta para obtener token
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),#Ruta para refrescar token
+=======
+    path('favicon.ico', RedirectView.as_view(url=settings.STATIC_URL + 'img/favicon.ico', permanent=True)),
+>>>>>>> cebe92da932b121c5939934bf42f04ea364846ec
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])
