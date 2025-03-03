@@ -20,9 +20,18 @@ from django.urls import path
 from core.views import index, help
 from django.urls import include
 
+from django.conf import settings
+from django.conf.urls.static import static
+from django.views.generic import RedirectView
+
+
 urlpatterns = [
     path('', index, name='falabella-co'),
     path('help/', help, name="help"),
     path('admin/', admin.site.urls),
     path('api/', include('users.urls')),
+    path('favicon.ico', RedirectView.as_view(url=settings.STATIC_URL + 'img/favicon.ico', permanent=True)),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])
