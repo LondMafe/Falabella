@@ -33,6 +33,7 @@ urlpatterns = [
     path('api/', include('users.urls')),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),#Ruta para obtener token
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),#Ruta para refrescar token
+    path('favicon.ico', RedirectView.as_view(url=settings.STATIC_URL + 'img/favicon.ico', permanent=True))
 ]
 
 if settings.DEBUG:
