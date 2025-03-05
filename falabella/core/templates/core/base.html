@@ -33,24 +33,20 @@
           </nav>
     
           <!-- Main Navbar -->
-      <nav class="navbar d-flex align-items-center justify-content-between px-3 py-2">
-        <!-- Logo + Menu -->
-        <div class="d-flex align-items-center">
-          <!-- Logo -->
-          <div class="me-3">
-            <img src="{% static 'img/falLogo.png' %}" alt="Falabella Icon" width="150" height="50">
-          </div>
-          <!-- Offcanvas Menu -->
-          <button class="d-flex align-items-center justify-content-center" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">
-            <i class="bi bi-list fs-1"></i> <strong class="fs-5">Menú</strong>
-          </button>
-          <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
-            <div class="offcanvas-header">
-              <h5 class="offcanvas-title" id="offcanvasMenuLabel">¡Hola!</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-              <ul class="list-unstyled">
+          <nav class="navbar border-bottom border-gray-200 d-flex align-items-center justify-content-between px-3 py-2 bg-gray-50">
+            <!-- Logo + Menu -->
+            <div class="d-flex align-items-center">
+              <!-- Logo -->
+              <div class="me-3">
+                <img src="{% static 'img/falLogo.png' %}" alt="Falabella Icon" width="150" height="50">
+              </div>
+              <!-- Dropdown -->
+              <div class=
+              <a class="href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="menuDropdown">
+                <i class="bi bi-list"></i> Menú
+              </a>
+              <ul class="dropdown-menu dropdown-menu-wide" style="max-height: 300px; overflow-y: auto;">
+                <li><a href="#" class="menu-hola">¡Hola!</a></li>
                 <li><a href="#" id="rebajas-link">Rebajas Vestuario</a></li>
                 <li><a href="#" id="tecnologia-link">Tecnología</a></li>
                 <li><a href="#" id="celulares-link">Celulares y accesorios</a></li>
@@ -87,110 +83,649 @@
               </ul>
             </div>
           </div>
-        </div>
-        <!-- Search bar -->
-        <div class="flex-grow-1 mx-4">
-          <div class="input-group">
-            <input
-              class="form-control rounded-pill py-2 bg-transparent"
-              type="search"
-              placeholder="Buscar en falabella.com"
-              aria-label="Search"
-            >
-            <span
-              class="position-absolute top-50 end-0 translate-middle-y me-2 bg-secondary rounded-circle"
-              style="width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">
-              <i class="bi bi-search text-white"></i>
-            </span>
+          <!-- Search bar -->
+          <div class="flex-grow-1 mx-4">
+            <div class="input-group">
+              <input
+                class="form-control rounded-pill py-2 bg-transparent"
+                type="search"
+                placeholder="Buscar en falabella.com"
+                aria-label="Search"
+              >
+              <span
+                class="position-absolute top-50 end-0 translate-middle-y me-2 bg-secondary rounded-circle"
+                style="width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">
+                <i class="bi bi-search text-white"></i>
+              </span>
+            </div>
           </div>
-        </div>
-        <!-- Links -->
-        <nav class="navbar p-2">
-          <div class="container-fluid d-flex align-items-center justify-content-between">
-            <!-- Login -->
-            <div class="d-flex flex-column align-items-start" id="loginArea">
-              <strong class="text-dark mb-0 fs-5">Hola,</strong> <!-- Aumentar el tamaño del texto -->
+          <!-- Links -->
+          <nav class="navbar p-2">
+            <div class="container-fluid d-flex align-items-center justify-content-between">
+              <!-- Login -->
+              <div class="d-flex flex-column align-items-start">
+                <span class="text-dark mb-0">Hola,</span>
+                <div class= "dropdown">
+                  <button class="btn dropdown-toggle p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="loginDropdown">
+                    <strong class="text-dark">Inicia sesión</strong>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Inicia sesión</a></li>
+                    <li><a class="dropdown-item" href="#">Regístrate</a></li>
+                    <li><a class="dropdown-item" href="#">Mi cuenta</a></li>
+                  </ul>
+                </div>
+              </div>
+              <!-- Divider -->
+              <div class="vr mx-3"></div>
+              <!-- Mis compras -->
               <div class="d-flex align-items-center">
-                <strong class="text-dark fs-5">Inicia sesión</strong> <!-- Aumentar el tamaño del texto -->
-                <i class="bi bi-chevron-down ms-1 fs-5"></i> <!-- Aumentar el tamaño del ícono -->
-              </div>
-            </div>
-            <!-- Divider -->
-            <div class="vr mx-3"></div>
-            <!-- Mis compras -->
-            <div class="d-flex align-items-center">
-              <div class="d-flex flex-column" style="line-height: 1;">
-                <strong class="text-dark">Mis</strong>
-                <strong class="text-dark fw-bold">compras</strong>
-              </div>
-              <!-- Divider -->
-              <div class="vr mx-3"></div>
-              <!-- Liked -->
-              <a href="#">
-                <i class="bi bi-heart text-dark fs-4"></i>
-              </a>
-              <!-- Divider -->
-              <div class="vr mx-3"></div>
-              <!-- Cart -->
-              <div class="position-relative me-3">
-                <a href="#" class="text-decoration-none">
-                  <i class="bi bi-cart3 text-dark fs-4"></i>
+                <div class="d-flex flex-column" style="line-height: 1;">
+                  <span class="text-dark">Mis</span>
+                  <span class="text-dark fw-bold">compras</span>
+                </div>
+                <!-- Divider -->
+                <div class="vr mx-3"></div>
+                <!-- Liked -->
+                <a href="#">
+                  <i class="bi bi-heart text-dark fs-4"></i>
                 </a>
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark">
-                  0
-                </span>
+                <!-- Divider -->
+                <div class="vr mx-3"></div>
+                <!-- Cart -->
+                <div class="position-relative me-3">
+                  <a href="#" class="text-decoration-none">
+                    <i class="bi bi-cart3 text-dark fs-4"></i>
+                  </a>
+                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark">
+                    0
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
+          </nav>
         </nav>
-      </nav>
-     
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-          return new bootstrap.Tooltip(tooltipTriggerEl)
-        });
-
-        var loginArea = document.getElementById('loginArea');
-        var popoverContent = `
-          <div class="popover-body text-start" style="width: 700px;">
-            <ul class="list-unstyled">
-              <li class="mb-4" style="width: 200px;"><a href="#">Inicia sesión</a></li>
-              <li class="mb-4" style="width: 200px;"><a href="#">Regístrate</a></li>
-              <li class="mb-4" style="width: 200px;"><a href="#">Mi cuenta</a></li>
-              <hr class="my-4"> <!-- Añadir línea horizontal y espacio -->
-              <li class="mb-4" style="width: 200px;"><a href="#">CMR Puntos</a></li>
-            </ul>
+        <!-- Last Navbar -->
+        <!-- Content -->
+        <!--% block content -->
+        <!--% endblock % -->
+      </div>
+      <!-- Modulo para Rebajas Vestuario -->
+      <div class="modal fade" id="rebajasModal" tabindex="-1" aria-labelledby="rebajasModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="rebajasModalLabel">Rebajas Vestuario</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Descuentos en vestuario.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
           </div>
-        `;
-
-        var popover = new bootstrap.Popover(loginArea, {
-          trigger: 'manual',
-          placement: 'right', // Cambia 'bottom' a 'right' para cambiar la posición
-          html: true,
-          content: popoverContent
+        </div>
+      </div>
+      <!-- Modulo para Tecnología -->
+      <div class="modal fade" id="tecnologiaModal" tabindex="-1" aria-labelledby="tecnologiaModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="tecnologiaModalLabel">Tecnología</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Aquí puedes explorar la última tecnología.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modulo para Celulares y accesorios -->
+      <div class="modal fade" id="celularesModal" tabindex="-1" aria-labelledby="celularesModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="celularesModalLabel">Celulares y accesorios</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Aquí puedes explorar los últimos celulares y accesorios.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modulo para Electrohogar -->
+      <div class="modal fade" id="electrohogarModal" tabindex="-1" aria-labelledby="electrohogarModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="electrohogarModalLabel">Electrohogar</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Aquí puedes explorar productos de electrohogar.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modulo para Moda mujer -->
+      <div class="modal fade" id="modaMujerModal" tabindex="-1" aria-labelledby="modaMujerModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modaMujerModalLabel">Moda mujer</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Aquí puedes explorar productos de moda para mujer.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Modulo para Moda hombre -->
+      <div class="modal fade" id="modaHombreModal" tabindex="-1" aria-labelledby="modaHombreModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modaHombreModalLabel">Moda hombre</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Aquí puedes explorar productos de moda para hombre.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Modal para Tenis y zapatos -->
+      <div class="modal fade" id="tenisZapatosModal" tabindex="-1" aria-labelledby="tenisZapatosModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="tenisZapatosModalLabel">Tenis y zapatos</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Aquí puedes explorar productos de tenis y zapatos.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Modal para Belleza y salud -->
+      <div class="modal fade" id="bellezaSaludModal" tabindex="-1" aria-labelledby="bellezaSaludModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="bellezaSaludModalLabel">Belleza y salud</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Aquí puedes explorar productos de belleza y salud.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Modal para Relojes, gafas, cartera y más -->
+      <div class="modal fade" id="relojesGafasModal" tabindex="-1" aria-labelledby="relojesGafasModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="relojesGafasModalLabel">Relojes, gafas, cartera y más</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Aquí puedes explorar productos de relojes, gafas, cartera y más.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Modal para Niños y juguetes -->
+      <div class="modal fade" id="ninosJuguetesModal" tabindex="-1" aria-labelledby="ninosJuguetesModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="ninosJuguetesModalLabel">Niños y juguetes</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Aquí puedes explorar productos para niños y juguetes.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Modal para Moda niños y bebés -->
+      <div class="modal fade" id="modaNinosBebesModal" tabindex="-1" aria-labelledby="modaNinosBebesModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modaNinosBebesModalLabel">Moda niños y bebés</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Aquí puedes explorar productos de moda para niños y bebés.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal para Muebles y organización -->
+      <div class="modal fade" id="mueblesOrganizacionModal" tabindex="-1" aria-labelledby="mueblesOrganizacionModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="mueblesOrganizacionModalLabel">Muebles y organización</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Aquí puedes explorar productos de muebles y organización.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Modal para Dormitorio -->
+      <div class="modal fade" id="dormitorioModal" tabindex="-1" aria-labelledby="dormitorioModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="dormitorioModalLabel">Dormitorio</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Aquí puedes explorar productos para el dormitorio.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Modal para Bebé -->
+      <div class="modal fade" id="bebeModal" tabindex="-1" aria-labelledby="bebeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="bebeModalLabel">Bebé</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Aquí puedes explorar productos para bebés.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Modal para Cocina y menaje -->
+      <div class="modal fade" id="cocinaMenajeModal" tabindex="-1" aria-labelledby="cocinaMenajeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="cocinaMenajeModalLabel">Cocina y menaje</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Aquí puedes explorar productos de cocina y menaje.
+            </div>
+            <div class="modal-footer">
+  
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Modal para Deportes y aire libre -->
+      <div class="modal fade" id="deportesAireLibreModal" tabindex="-1" aria-labelledby="deportesAireLibreModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="deportesAireLibreModalLabel">Deportes y aire libre</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Aquí puedes explorar productos de deportes y aire libre.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Modal para Decoración e iluminación -->
+      <div class="modal fade" id="decoracionIluminacionModal" tabindex="-1" aria-labelledby="decoracionIluminacionModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="decoracionIluminacionModalLabel">Decoración e iluminación</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Aquí puedes explorar productos de decoración e iluminación.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Modal para Mascotas -->
+      <div class="modal fade" id="mascotasModal" tabindex="-1" aria-labelledby="mascotasModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="mascotasModalLabel">Mascotas</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Aquí puedes explorar productos para mascotas.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Modal para Herramientas y maquinaria -->
+      <div class="modal fade" id="herramientasMaquinariaModal" tabindex="-1" aria-labelledby="herramientasMaquinariaModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="herramientasMaquinariaModalLabel">Herramientas y maquinaria</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Aquí puedes explorar productos de herramientas y maquinaria.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Modal para Jardin y terraza -->
+      <div class="modal fade" id="jardinTerrazaModal" tabindex="-1" aria-labelledby="jardinTerrazaModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="jardinTerrazaModalLabel">Jardin y terraza</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Aquí puedes explorar productos para jardín y terraza.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Modal para Ferretería y construcción -->
+      <div class="modal fade" id="ferreteriaConstruccionModal" tabindex="-1" aria-labelledby="ferreteriaConstruccionModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="ferreteriaConstruccionModalLabel">Ferretería y construcción</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Aquí puedes explorar productos de ferretería y construcción.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Modal para Supermercado -->
+      <div class="modal fade" id="supermercadoModal" tabindex="-1" aria-labelledby="supermercadoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="supermercadoModalLabel">Supermercado</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Aquí puedes explorar productos de supermercado.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Modal para Automotriz -->
+      <div class="modal fade" id="automotrizModal" tabindex="-1" aria-labelledby="automotrizModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="automotrizModalLabel">Automotriz</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Aquí puedes explorar productos automotrices.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Modal para Motos -->
+      <div class="modal fade" id="motosModal" tabindex="-1" aria-labelledby="motosModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="motosModalLabel">Motos</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Aquí puedes explorar productos de motos.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Modal para Baño -->
+      <div class="modal fade" id="banoModal" tabindex="-1" aria-labelledby="banoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="banoModalLabel">Baño</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Aquí puedes explorar productos para el baño.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Modal para Emprendedores -->
+      <div class="modal fade" id="emprendedoresModal" tabindex="-1" aria-labelledby="emprendedoresModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="emprendedoresModalLabel">Emprendedores</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Aquí puedes explorar productos para emprendedores.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Modal para Servicios y experiencias -->
+      <div class="modal fade" id="serviciosExperienciasModal" tabindex="-1" aria-labelledby="serviciosExperienciasModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="serviciosExperienciasModalLabel">Servicios y experiencias</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Aquí puedes explorar servicios y experiencias.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Modal para Crate&Barrel -->
+      <div class="modal fade" id="crateBarrelModal" tabindex="-1" aria-labelledby="crateBarrelModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="crateBarrelModalLabel">Crate&Barrel</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Aquí puedes explorar productos de Crate&Barrel.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Modal para Libros, papelería y música -->
+      <div class="modal fade" id="librosPapeleriaMusicaModal" tabindex="-1" aria-labelledby="librosPapeleriaMusicaModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="librosPapeleriaMusicaModalLabel">Libros, papelería y música</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Aquí puedes explorar productos de libros, papelería y música.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+          var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+          })
+          var modals = {
+            'rebajas-link': new bootstrap.Modal(document.getElementById('rebajasModal')),
+            'tecnologia-link': new bootstrap.Modal(document.getElementById('tecnologiaModal')),
+            'celulares-link': new bootstrap.Modal(document.getElementById('celularesModal')),
+            'electrohogar-link': new bootstrap.Modal(document.getElementById('electrohogarModal')),
+            'moda-mujer-link': new bootstrap.Modal(document.getElementById('modaMujerModal')),
+            'moda-hombre-link': new bootstrap.Modal(document.getElementById('modaHombreModal')),
+            'tenis-zapatos-link': new bootstrap.Modal(document.getElementById('tenisZapatosModal')),
+            'belleza-salud-link': new bootstrap.Modal(document.getElementById('bellezaSaludModal')),
+            'relojes-gafas-link': new bootstrap.Modal(document.getElementById('relojesGafasModal')),
+            'ninos-juguetes-link': new bootstrap.Modal(document.getElementById('ninosJuguetesModal')),
+            'moda-ninos-bebes-link': new bootstrap.Modal(document.getElementById('modaNinosBebesModal')),
+            'muebles-organizacion-link': new bootstrap.Modal(document.getElementById('mueblesOrganizacionModal')),
+            'dormitorio-link': new bootstrap.Modal(document.getElementById('dormitorioModal')),
+            'bebe-link': new bootstrap.Modal(document.getElementById('bebeModal')),
+            'cocina-menaje-link': new bootstrap.Modal(document.getElementById('cocinaMenajeModal')),
+            'deportes-aire-libre-link': new bootstrap.Modal(document.getElementById('deportesAireLibreModal')),
+            'decoracion-iluminacion-link': new bootstrap.Modal(document.getElementById('decoracionIluminacionModal')),
+            'mascotas-link': new bootstrap.Modal(document.getElementById('mascotasModal')),
+            'herramientas-maquinaria-link': new bootstrap.Modal(document.getElementById('herramientasMaquinariaModal')),
+            'jardin-terraza-link': new bootstrap.Modal(document.getElementById('jardinTerrazaModal')),
+            'ferreteria-construccion-link': new bootstrap.Modal(document.getElementById('ferreteriaConstruccionModal')),
+            'supermercado-link': new bootstrap.Modal(document.getElementById('supermercadoModal')),
+            'automotriz-link': new bootstrap.Modal(document.getElementById('automotrizModal')),
+            'motos-link': new bootstrap.Modal(document.getElementById('motosModal')),
+            'bano-link': new bootstrap.Modal(document.getElementById('banoModal')),
+            'emprendedores-link': new bootstrap.Modal(document.getElementById('emprendedoresModal')),
+            'servicios-experiencias-link': new bootstrap.Modal(document.getElementById('serviciosExperienciasModal')),
+            'crate-barrel-link': new bootstrap.Modal(document.getElementById('crateBarrelModal')),
+            'libros-papeleria-musica-link': new bootstrap.Modal(document.getElementById('librosPapeleriaMusicaModal'))
+          };
+  
+          Object.keys(modals).forEach(function (id) {
+            var link = document.getElementById(id);
+            link.addEventListener('mouseover', function () {
+              modals[id].show();
+            });
+          });
+  
+          var loginDropdown = document.getElementById('loginDropdown');
+          loginDropdown.addEventListener('mouseover', function () {
+            var dropdown = new bootstrap.Dropdown(loginDropdown);
+            dropdown.show();
+          });
+  
+          var rebajasModal = document.getElementById('rebajasModal');
+          rebajasModal.addEventListener('hidden.bs.modal', function () {
+            var menuDropdown = document.getElementById('menuDropdown');
+            var dropdown = new bootstrap.Dropdown(menuDropdown);
+            dropdown.show();
+          });
         });
-
-        loginArea.addEventListener('mouseover', function () {
-          popover.show();
-        });
-
-        loginArea.addEventListener('mouseleave', function () {
-          setTimeout(function () {
-            if (!loginArea.matches(':hover') && !document.querySelector('.popover:hover')) {
-              popover.hide();
-            }
-          }, 300);
-        });
-
-        document.addEventListener('click', function (event) {
-          if (!loginArea.contains(event.target) && !document.querySelector('.popover').contains(event.target)) {
-            popover.hide();
-          }
-        });
-      });
-    </script>
-  </body>
-</html>
+      </script>
+    </body>
+  </html>
