@@ -11,6 +11,281 @@
         <script src="https://cdn.tailwindcss.com"></script>      
         <meta name="description" content="Falabella Colombia">
         <title>{% block title %}{% endblock %}</title>
+
+        <style>
+          .dropdown-menu-wide {
+            width: 300px;
+            /* Ajusta este valor según tus necesidades */
+            border: none;
+            /* Eliminar borde */
+            background: none;
+            /* Eliminar fondo */
+            box-shadow: none;
+            /* Eliminar sombra */
+          }
+      
+          .menu-hola {
+            color: #040000;
+            /* Color del texto */
+            font-weight: bold;
+            /* Opcional: para hacer el texto en negrita */
+            padding: 5px;
+            /* Opcional: para agregar un poco de espacio alrededor del texto */
+            border-radius: 5px;
+            /* Opcional: para redondear las esquinas */
+          }
+      
+          .dropdown-toggle.no-arrow::after {
+            display: none;
+          }
+      
+          .bold-on-hover:hover {
+            font-weight: bold;
+          }
+      
+          .semi-bold-on-hover:hover {
+            font-weight: 500;
+          }
+      
+          .popover {
+            max-width: 200px !important;
+          }
+      
+          .popover-body {
+            width: 200px !important;
+            padding: 1rem !important;
+          }
+      
+          .popover hr {
+            margin: 0.5rem 0;
+            border-top: 1px solid #dee2e6;
+            opacity: 1;
+            width: 80%;
+          }
+      
+          .submenu {
+            position: absolute;
+            left: 250px;
+            top: 0;
+            height: 95vh;
+            /* Reducir la altura a 80vh */
+            width: 900px;
+            background-color: white;
+            border-left: 1px solid #dee2e6;
+            padding: 1rem;
+            display: none;
+            z-index: 1050;
+            overflow-y: auto;
+            /* Cambiar de hidden a auto */
+            padding-top: 60px;
+            transition: all 0.2s ease-in-out;
+            visibility: hidden;
+            opacity: 0;
+            border-radius: 0 15px 15px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            /* Añadir sombra */
+          }
+      
+          .submenu:hover,
+          .menu-item:hover .submenu {
+            display: block;
+          }
+      
+          /* Ajustar el comportamiento del hover */
+          .menu-item .submenu {
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s;
+          }
+      
+          .menu-item:hover .submenu,
+          .submenu:hover {
+            visibility: visible;
+            opacity: 1;
+            display: block;
+          }
+      
+          /* Estilos para la barra de desplazamiento */
+          .submenu::-webkit-scrollbar {
+            width: 16px !important;
+            display: block !important;
+          }
+      
+          .submenu::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+            /* Añadir borde curvo */
+            margin: 5px;
+            margin-top: 1cm;
+            /* Añadir margen superior de 1 cm */
+          }
+      
+          .submenu::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+            /* Añadir borde curvo */
+            min-height: 50px;
+            border: 3px solid #f1f1f1;
+          }
+      
+          .submenu::-webkit-scrollbar-thumb:hover {
+            background: #555;
+          }
+      
+          .submenu,
+          .offcanvas-body {
+            overflow-y: auto;
+            scrollbar-width: thick;
+            /* Cambiado a thick para una barra más ancha */
+            scrollbar-color: #888 #f1f1f1;
+          }
+      
+          /* Estilos específicos para la barra de desplazamiento */
+          .submenu::-webkit-scrollbar,
+          .offcanvas-body::-webkit-scrollbar {
+            width: 20px !important;
+            /* Aumentado significativamente */
+            display: block !important;
+            /* Fuerza la visualización de la barra */
+          }
+      
+          .submenu::-webkit-scrollbar-track,
+          .offcanvas-body::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+            /* Añadir borde curvo */
+            margin: 5px;
+            margin-top: 1cm;
+            /* Añadir margen superior de 1 cm */
+          }
+      
+          .submenu::-webkit-scrollbar-thumb,
+          .offcanvas-body::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+            /* Añadir borde curvo */
+            border: 3px solid #f1f1f1;
+            /* Añade borde */
+            min-height: 60px;
+          }
+      
+          .submenu::-webkit-scrollbar-thumb:hover,
+          .offcanvas-body::-webkit-scrollbar-thumb:hover {
+            background: #555;
+          }
+      
+          /* Asegura que el contenedor del submenu tenga suficiente contenido para scroll */
+          .submenu ul,
+          .offcanvas-body ul {
+            min-height: 120vh;
+            /* Mayor que la altura de la ventana */
+            padding-bottom: 200px;
+          }
+      
+          .menu-item:hover .submenu {
+            display: block;
+          }
+      
+          /* Asegurarse de que el contenido del submenu comience en la misma posición que el menú principal */
+          .offcanvas-body {
+            padding-top: 0;
+            height: calc(100vh - 60px);
+            /* Misma altura que el submenu */
+            overflow-y: auto;
+          }
+      
+          /* Comportamiento del hover */
+          .menu-item:hover .submenu {
+            display: block;
+            opacity: 1;
+            visibility: visible;
+          }
+      
+          .submenu:hover {
+            display: block !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            transform: translateZ(0);
+            /* Activar aceleración por hardware */
+            will-change: transform;
+            /* Optimizar rendimiento */
+          }
+      
+          .menu-item.active .submenu {
+            display: block;
+          }
+      
+          /* Estilo específico para el submenu de Tecnología */
+          #tecnologia-link+i+.submenu {
+            border-radius: 0 15px 15px 0;
+            /* Bordes curvos solo al lado derecho */
+            border-left: 2px solid #dee2e6;
+            /* Borde izquierdo más definido */
+            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+            /* Sombra suave en el lado derecho */
+          }
+      
+          /* Ajustar el contenedor del submenu */
+          #tecnologia-link+i+.submenu::-webkit-scrollbar-track {
+            border-radius: 0 10px 10px 0;
+            /* Borde curvo solo al lado derecho */
+            margin: 5px;
+            margin-top: 1cm;
+            /* Añadir margen superior de 1 cm */
+          }
+      
+          /* Ajustar la barra de desplazamiento */
+          #tecnologia-link+i+.submenu::-webkit-scrollbar {
+            border-radius: 0 10px 10px 0;
+            /* Borde curvo solo al lado derecho */
+            margin-right: 5px;
+          }
+      
+          /* Ajustar el espaciado superior del contenido del submenu */
+          .submenu .row {
+            margin-top: 20px;
+            /* Espacio superior */
+            padding-top: 20px;
+            /* Padding adicional */
+          }
+      
+          /* Si necesitas ajustar específicamente las columnas */
+          .submenu .col-md-3 {
+            margin-top: 15px;
+            /* Espacio superior para cada columna */
+          }
+      
+          /* Ajustar el título del submenu */
+          .submenu h6 {
+            margin-top: 15px;
+            /* Espacio superior para los títulos */
+          }
+      
+          /* Cambiar el cursor a una mano para "Hola, Inicia sesión" y su submenú, "Mis compras", "Rebajas Vestuario", "Menú" y su submenú */
+          #loginArea,
+          #loginArea a,
+          #misCompras,
+          #misCompras a,
+          #rebajas-link,
+          .menu-item,
+          .submenu,
+          button[data-bs-toggle="offcanvas"] {
+            cursor: pointer;
+          }
+      
+          .no-underline {
+            text-decoration: none !important;
+            color: inherit !important;
+          }
+      
+          a {
+            text-decoration: none;
+            color: inherit;
+          }
+        </style>
+      
+
+
       </head>
       <body>
     
@@ -41,88 +316,293 @@
                 <img src="{% static 'img/falLogo.png' %}" alt="Falabella Icon" width="150" height="50">
               </div>
               <!-- Dropdown -->
-              <div class=
-              <a class="href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="menuDropdown">
-                <i class="bi bi-list"></i> Menú
-              </a>
-              <ul class="dropdown-menu dropdown-menu-wide" style="max-height: 300px; overflow-y: auto;">
-                <li><a href="#" class="menu-hola">¡Hola!</a></li>
-                <li><a href="#" id="rebajas-link">Rebajas Vestuario</a></li>
-                <li><a href="#" id="tecnologia-link">Tecnología</a></li>
-                <li><a href="#" id="celulares-link">Celulares y accesorios</a></li>
-                <li><a href="#" id="electrohogar-link">Electrohogar</a></li>
-                <li><a href="#" id="moda-mujer-link">Moda mujer</a></li>
-                <li><a href="#" id="moda-hombre-link">Moda hombre</a></li>
-                <li><a href="#" id="tenis-zapatos-link">Tenis y zapatos</a></li>
-                <li><a href="#" id="belleza-salud-link">Belleza y salud</a></li>
-                <li><a href="#" id="relojes-gafas-link">Relojes, gafas, cartera y más</a></li>
-                <li><a href="#" id="ninos-juguetes-link">Niños y juguetes</a></li>
-                <li><a href="#" id="moda-ninos-bebes-link">Moda niños y bebés</a></li>
-                <li><a href="#" id="muebles-organizacion-link">Muebles y organización</a></li>
-                <li><a href="#" id="dormitorio-link">Dormitorio</a></li>
-                <li><a href="#" id="bebe-link">Bebé</a></li>
-                <li><a href="#" id="cocina-menaje-link">Cocina y menaje</a></li>
-                <li><a href="#" id="deportes-aire-libre-link">Deportes y aire libre</a></li>
-                <li><a href="#" id="decoracion-iluminacion-link">Decoración e iluminación</a></li>
-                <li><a href="#" id="mascotas-link">Mascotas</a></li>
-                <li><a href="#" id="herramientas-maquinaria-link">Herramientas y maquinaria</a></li>
-                <li><a href="#" id="jardin-terraza-link">Jardin y terraza</a></li>
-                <li><a href="#" id="ferreteria-construccion-link">Ferretería y construcción</a></li>
-                <li><a href="#" id="supermercado-link">Supermercado</a></li>
-                <li><a href="#" id="automotriz-link">Automotriz</a></li>
-                <li><a href="#" id="motos-link">Motos</a></li>
-                <li><a href="#" id="bano-link">Baño</a></li>
-                <li><a href="#" id="emprendedores-link">Emprendedores</a></li>
-                <li><a href="#" id="servicios-experiencias-link">Servicios y experiencias</a></li>
-                <li><a href="#" id="crate-barrel-link">Crate&Barrel</a></li>
-                <li><a href="#" id="libros-papeleria-musica-link">Libros, papelería y música</a></li>
-                <li><a href="#">TIENDAS OFICIALES</a></li>
-                <li><a href="#">Vende en falabella.com</a></li>
-                <li><a href="#">Guias de compras</a></li>
-                <li><a href="#">Horario de tiendas</a></li>
-              </ul>
-            </div>
-          </div>
-          <!-- Search bar -->
-          <div class="flex-grow-1 mx-4">
-            <div class="input-group">
-              <input
-                class="form-control rounded-pill py-2 bg-transparent"
-                type="search"
-                placeholder="Buscar en falabella.com"
-                aria-label="Search"
-              >
-              <span
-                class="position-absolute top-50 end-0 translate-middle-y me-2 bg-secondary rounded-circle"
-                style="width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">
-                <i class="bi bi-search text-white"></i>
-              </span>
-            </div>
-          </div>
-          <!-- Links -->
-          <nav class="navbar p-2">
-            <div class="container-fluid d-flex align-items-center justify-content-between">
-              <!-- Login -->
-              <div class="d-flex flex-column align-items-start">
-                <span class="text-dark mb-0">Hola,</span>
-                <div class= "dropdown">
-                  <button class="btn dropdown-toggle p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="loginDropdown">
-                    <strong class="text-dark">Inicia sesión</strong>
-                  </button>
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Inicia sesión</a></li>
-                    <li><a class="dropdown-item" href="#">Regístrate</a></li>
-                    <li><a class="dropdown-item" href="#">Mi cuenta</a></li>
+              <button class="d-flex align-items-center justify-content-center" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">
+                <i class="bi bi-list"></i> <strong class="fs-5">Menú</strong>
+              </button>
+              <!---
+              <button class="d-flex align-items-center justify-content-center" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">
+                <i class="bi bi-list fs-1"></i> <strong class="fs-5">Menú</strong>
+              </button>
+              -->
+              <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel" style="width: 250px;">
+                <div class="offcanvas-header">
+                  <h5  class="offcanvas-title" id="offcanvasMenuLabel">¡Hola!</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                  <ul class="list-unstyled">
+                    <li class="d-flex justify-content-between align-items-center menu-item">
+                      <span href="#" id="rebajas-link">Rebajas Vestuario</span>
+                      <i class="bi bi-chevron-right"></i>
+                      <div class="submenu">
+                        <div class="row g-2"> <!-- Añadimos la clase g-2 para reducir el espaciado -->
+                          <!-- Columna Ropa Mujer -->
+                          <div class="col-md-3 px-2"> <!-- Reducimos el padding horizontal -->
+                            <h6 class="mb-2"><span class="bold-on-hover"><a href="/">Rebajas Ropa Mujer</a></span></h6>
+                            <ul class="list-unstyled">
+                              <li class="mb-2"><a href="#" class="semi-bold-on-hover">Blusas</a></li>
+                              <li class="mb-2"><a href="#" class="semi-bold-on-hover">Camisetas</a></li>
+                              <li class="mb-2"><a href="#" class="semi-bold-on-hover">Sacos y Sweaters</a></li>
+                              <li class="mb-2"><a href="#" class="semi-bold-on-hover">Vestidos</a></li>
+                              <li class="mb-2"><a href="#" class="semi-bold-on-hover">Jeans</a></li>
+                              <li class="mb-2"><a href="#" class="semi-bold-on-hover">Pantalones</a></li>
+                              <li class="mb-2"><a href="#" class="semi-bold-on-hover">Cardigans</a></li>
+                              <li class="mb-2"><a href="#" class="semi-bold-on-hover">Chalecos</a></li>
+                              <li class="mb-2"><a href="#" class="semi-bold-on-hover">Pijamas</a></li>
+                              <li class="mb-2"><a href="#" class="semi-bold-on-hover">Brassieres</a></li>
+                              <li class="mb-2"><a href="#" class="semi-bold-on-hover">Calzones</a></li>
+                              <li class="mb-4" style="width: 150px;"></li>
+                              <h6 class="mb-2">Ropa Deportiva Mujer</h6>
+                              <ul class="list-unstyled">
+                                <li class="mb-2"><a href="#" class="semi-bold-on-hover">Camisetas</a></li>
+                                <li class="mb-2"><a href="#" class="semi-bold-on-hover">Tops</a></li>
+                                <li class="mb-2"><a href="#" class="semi-bold-on-hover">Short</a></li>
+                                <li class="mb-2"><a href="#" class="semi-bold-on-hover">Leggings</a></li>
+                                <li class="mb-2"><a href="#" class="semi-bold-on-hover">Sacos y Hoodies</a></li>
+                                <li class="mb-2"><a href="#" class="semi-bold-on-hover">Chaquetas</a></li>
+                                <li class="mb-2"><a href="#" class="semi-bold-on-hover">Pantalones</a></li>
+                              </ul>
+                          </div>                                          
+                          <!-- Nueva Columna Ropa Hombre -->
+                          <div class="col-md-3 px-2">
+                            <h6 class="mb-2"><span class="bold-on-hover">Ropa Hombre</span></h6>
+                            <ul class="list-unstyled">
+                              <li class="mb-2"><a href="#" class="semi-bold-on-hover">Camisas</a></li>
+                              <li class="mb-2"><a href="#" class="semi-bold-on-hover">Poleras</a></li>
+                              <li class="mb-2"><a href="#" class="semi-bold-on-hover">Chaquetas</a></li>
+                              <li class="mb-2"><a href="#" class="semi-bold-on-hover">Jeans</a></li>
+                              <li class="mb-2"><a href="#" class="semi-bold-on-hover">Pantalones</a></li>
+                              <li class="mb-2"><a href="#" class="semi-bold-on-hover">Polerones</a></li>
+                              <li class="mb-2"><a href="#" class="semi-bold-on-hover">Trajes</a></li>
+                              <li class="mb-2"><a href="#" class="semi-bold-on-hover">Ropa Interior</a></li>
+                              <li class="mb-2"><a href="#" class="semi-bold-on-hover">Calcetines</a></li>
+                              <li class="mb-4" style="width: 150px;"></li>
+                              <h6 class="mb-2"><span class="bold-on-hover">Ropa Deportiva Hombre</span></h6>
+                              <ul class="list-unstyled">
+                                <li class="mb-2"><a href="#" class="semi-bold-on-hover">Camisetas Futbool</a></li>
+                                <li class="mb-2"><a href="#" class="semi-bold-on-hover">Camisetas</a></li>
+                                <li class="mb-2"><a href="#" class="semi-bold-on-hover">Pantalonetas</a></li>
+                                <li class="mb-2"><a href="#" class="semi-bold-on-hover">Pantalones</a></li>
+                                <li class="mb-2"><a href="#" class="semi-bold-on-hover">Chaquetas</a></li>
+                                <li class="mb-2"><a href="#" class="semi-bold-on-hover">Sacos y Hoodies</a></li>                                          
+                            </ul>
+                          </div>
+                          <!-- Nueva Columna Ropa Hombre -->
+                          <div class="col-md-3 px-2">
+                            <h6 class="mb-2"><span class="bold-on-hover">Ropa Niñas</span></h6>
+                            <ul class="list-unstyled">
+                              <li class="mb-2"><a href="#" class="semi-bold-on-hover">Camisas</a></li>
+                              <li class="mb-2"><a href="#" class="semi-bold-on-hover">Poleras</a></li>
+                              <li class="mb-2"><a href="#" class="semi-bold-on-hover">Chaquetas</a></li>
+                              <li class="mb-2"><a href="#" class="semi-bold-on-hover">Jeans</a></li>
+                              <li class="mb-2"><a href="#" class="semi-bold-on-hover">Pantalones</a></li>
+                              <li class="mb-2"><a href="#" class="semi-bold-on-hover">Polerones</a></li>
+                              <li class="mb-2"><a href="#" class="semi-bold-on-hover">Trajes</a></li>
+                              <li class="mb-2"><a href="#" class="semi-bold-on-hover">Ropa Interior</a></li>
+                              <li class="mb-2"><a href="#" class="semi-bold-on-hover">Calcetines</a></li>
+                              <li class="mb-6" style="width: 150px;"></li>
+                              <h6 class="mb-2"><span class="bold-on-hover">Ropa Niño</span></h6>
+                              <ul class="list-unstyled">
+                                <li class="mb-2"><a href="#" class="semi-bold-on-hover">Camisetas</a></li>
+                                <li class="mb-2"><a href="#" class="semi-bold-on-hover">Pantalones</a></li>
+                                <li class="mb-2"><a href="#" class="semi-bold-on-hover">Sacos y Sweaters</a></li>
+                                <li class="mb-2"><a href="#" class="semi-bold-on-hover">Pijamas</a></li>
+                                <li class="mb-2"><a href="#" class="semi-bold-on-hover">Ropa interior</a></li>
+                                <li class="mb-2"><a href="#" class="semi-bold-on-hover">Chaquetas</a></li>
+                                <li class="mb-2"><a href="#" class="semi-bold-on-hover">Bermudas</a></li>
+                               <h6 class="mb-2"><span class="bold-on-hover">Ropa bebe niña</span></h6>
+                              <ul class="list-unstyled"> <!-- Abre una nueva lista aquí si es necesario -->
+                                <li class="mb-2"><a href="#" class="semi-bold-on-hover">Camisetas</a></li>
+                                <li class="mb-2"><a href="#" class="semi-bold-on-hover">Pantalones</a></li>
+                                <li class="mb-2"><a href="#" class="semi-bold-on-hover">Sacos y Sweaters</a></li>
+                                <li class="mb-2"><a href="#" class="semi-bold-on-hover">Pijamas</a></li>
+                                <li class="mb-2"><a href="#" class="semi-bold-on-hover">Ropa interior</a></li>
+                                <li class="mb-2"><a href="#" class="semi-bold-on-hover">Chaquetas</a></li>
+                                <li class="mb-2"><a href="#" class="semi-bold-on-hover">Bermudas</a></li>
+                            </ul>
+                          </div>
+                          <!-- Nueva Columna Ropa bebe niños -->
+                          <div class="col-md-3 px-2">
+                            <h6 class="mb-2"><span class="bold-on-hover">Ropa bebe niño</span></h6>
+                            <ul class="list-unstyled">
+                              <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">Packs</a></li>
+                              <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">Conjuntos</a></li>
+                              </ul>
+                          </div>
+                          <!--Tecnologia-->
+                          <li class="d-flex justify-content-between align-items-center menu-item">
+                            <span href="#" id="rebajas-link">Tecnología</span>
+                            <i class="bi bi-chevron-right"></i>
+                            <div class="submenu">
+                              <div class="row g-2"> <!-- Añadimos la clase g-2 para reducir el espaciado -->
+                                <!-- Columna Ropa Mujer -->
+                                <div class="col-md-3 px-2"> <!-- Reducimos el padding horizontal -->
+                                  <h6 class="mb-2"><span class="bold-on-hover">Computación</span></h6>
+                                  <ul class="list-unstyled">
+                                    <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">Portátiles</a></li>
+                                    <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">Inteligencia Artificial</a></li>
+                                    <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">Tablets</a></li>
+                                    <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">Impresoras</a></li>
+                                    <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">Portátiles gamer</a></li>
+                                    <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">Accesorios Computación</a></li>
+                                    <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">Monitores</a></li>
+                                    <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">Pc de escritorio</a></li>
+                                    <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">Conectividad</a></li>
+                                    <li class="mb-4" style="width: 150px;"></li>
+                                    
+                                    <h6 class="mb-2"><span class="bold-on-hover">Audio</span></h6>
+                                    <ul class="list-unstyled">
+                                      <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">Audifonos</a></li>
+                                      <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">Barras de sonido</a></li>
+                                      <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">Equipos de sonido y karaoke</a></li>
+                                      <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">Accesorios audio</a></li>
+                                      <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">Parlantes</a></li>
+                                      <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">Audio profesional y dj</a></li>
+                                      <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">Instrumentos musicales</a></li>
+                                    </ul>
+                                </div>                                          
+                                <!-- Nueva Columna Ropa Hombre -->
+                                <div class="col-md-3 px-2">
+                                  <h6 class="mb-2"><span class="bold-on-hover">Tv y video</span></h6>
+                                  <ul class="list-unstyled">
+                                    <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">Televisores</a></li>
+                                    <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">TVs de 42" o menos</a></li>
+                                    <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">TVs de 43"-49"</a></li>
+                                    <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">TVs de 50"-58"</a></li>
+                                    <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">TVs de 60"-65"</a></li>
+                                    <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">TVs superiores a 70"</a></li>
+                                    <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">Proyectores</a></li>
+                                    <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">Accesorios TV</a></li>
+                                    <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">Soportes</a></li>
+                                    <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">Streaming</a></li>
+                                    <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">Zona gamer</a></li>
+                                    <ul class="list-unstyled">
+                                      
+                                      <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">Portatiles gamer</a></li>
+                                      <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">Monitores gamer</a></li>
+                                      <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">Accesorios gamer</a></li>
+                                      <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">Audifonos gamer</a></li>
+                                      <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">Sillas gamer</a></li>
+                                      <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">Lentes VR</a></li>                                          
+                                  </ul>
+                                </div>
+                                <!-- Nueva Columna Ropa Hombre -->
+                                <div class="col-md-3 px-2">
+                                  <h6 class="mb-2"><span class="bold-on-hover">Consolas</span></h6>
+                                  <ul class="list-unstyled">
+                                    <li class="mb-2"><a href="#" class="semi-bold-on-hover" style="text-decoration: none; color: inherit;">Playstation</a></li>
+                                    <li class="mb-2"><a href="#" class="semi-bold-on-hover" style="text-decoration: none; color: inherit;">Nintendo</a></li>
+                                    <li class="mb-2"><a href="#" class="semi-bold-on-hover" style="text-decoration: none; color: inherit;">Xbox</a></li>
+                                    <li class="mb-2"><a href="#" class="semi-bold-on-hover" style="text-decoration: none; color: inherit;">Videojuegos</a></li>
+                                    <li class="mb-2"><a href="#" class="semi-bold-on-hover" style="text-decoration: none; color: inherit;">Accesorios</a></li>
+                                    <li class="mb-2"><a href="#" class="semi-bold-on-hover" style="text-decoration: none; color: inherit;">Consolas retro</a></li>
+                                    <li class="mb-6" style="width: 150px;"></li>
+                                    <h6 class="mb-2"><span class="bold-on-hover">Smartwatch y accesorios</span></h6>
+                                    <ul class="list-unstyled">
+                                      <li class="mb-2"><a href="#" class="semi-bold-on-hover" style="text-decoration: none; color: inherit;">Smartwatch</a></li>
+                                      <li class="mb-2"><a href="#" class="semi-bold-on-hover" style="text-decoration: none; color: inherit;">Smartband</a></li>
+                                      <li class="mb-2"><a href="#" class="semi-bold-on-hover" style="text-decoration: none; color: inherit;">Accesorios</a></li>
+                                     
+                                      <h6 class="mb-2"><span class="bold-on-hover">Cámaras y drones</span></h6>
+                                    <ul class="list-unstyled">
+                                      <li class="mb-2"><a href="#" class="semi-bold-on-hover" style="text-decoration: none; color: inherit;">Cámaras deportivas</a></li>
+                                      <li class="mb-2"><a href="#" class="semi-bold-on-hover" style="text-decoration: none; color: inherit;">Cámaras instantaneas</a></li>
+                                      <li class="mb-2"><a href="#" class="semi-bold-on-hover" style="text-decoration: none; color: inherit;">Cámaras profesionales</a></li>
+                                      <li class="mb-2"><a href="#" class="semi-bold-on-hover" style="text-decoration: none; color: inherit;">Cámaras semiprofesionales</a></li>
+                                      <li class="mb-2"><a href="#" class="semi-bold-on-hover" style="text-decoration: none; color: inherit;">Accesorios fotografía</a></li>
+                                      <li class="mb-2"><a href="#" class="semi-bold-on-hover" style="text-decoration: none; color: inherit;">Drones</a></li>
+                                    </ul>
+                                  </ul>
+                                </div>
+                                <!-- Nueva Columna Ropa bebe niños -->
+                                <div class="col-md-3 px-2">
+                                  <h6 class="mb-2"><span class="bold-on-hover">Patinetas eléctricas</span></h6>
+                                  <ul class="list-unstyled">
+                                    <li class="mb-2"><a href="#" class="semi-bold-on-hover" style="text-decoration: none; color: inherit;">ver todo</a></li>
+                                    <div style="margin-bottom: 20px;"></div>
+                                    <h6 class="mb-2"><span class="bold-on-hover">Smart Home</span></h6>
+                                    <ul class="list-unstyled">
+                                      <li class="mb-2"><a href="#" class="semi-bold-on-hover" style="text-decoration: none; color: inherit;">Asistentes de voz</a></li>
+                                      <li class="mb-2"><a href="#" class="semi-bold-on-hover" style="text-decoration: none; color: inherit;">Aspiradoras robots</a></li>
+                                      <li class="mb-2"><a href="#" class="semi-bold-on-hover" style="text-decoration: none; color: inherit;">Iluminación inteligente</a></li>
+                                      <li class="mb-2"><a href="#" class="semi-bold-on-hover" style="text-decoration: none; color: inherit;">Cámaras inteligentes</a></li>
+                                      <li class="mb-2"><a href="#" class="semi-bold-on-hover" style="text-decoration: none; color: inherit;">Routers y conectividad</a></li>
+                                      <h6 class="mb-2"><span class="bold-on-hover">Marcas Destacadas</span></h6>
+                                      <ul class="list-unstyled">
+                                        <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">Apple</a></li>
+                                        <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">Samsung</a></li>
+                                        <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">Xiaomi</a></li>
+                                        <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">LG</a></li>
+                                        <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">Sony</a></li>
+                                        <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">Bosse</a></li>
+                                        <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">HP</a></li>
+                                        <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">Lenovo</a></li>
+                                        <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">Asus</a></li>
+                                        <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline">JVC</a></li>
+                                        <li class="mb-2"><a href="#" class="semi-bold-on-hover no-underline"></a></li>                      
+                                    </ul>                                
+                                </div>
+                                
+                    
+                         
+                        </div>
+                      </div>
+                    </li>
+                    
+                   
+                    <li class="mb-4" style="width: 150px;"></li>
+                    <hr class="my-4">
+                    <li><a href="#" style="text-decoration: none; color: black; font-size: x-small;"><small><strong>TIENDAS OFICIALES</strong></small></a></li>
+                    <li class="mb-4" style="width: 100px;"></li>
+                    <li><a href="#"><img src="{% static 'img/homIconButton.png' %}" alt="Homecenter Icon" width="100" height="30"></a></li>
+                    <li class="mb-4" style="width: 100px;"></li>
+                    
+                    <hr class="my-4"> 
+                    <li><a href="#" style="text-decoration: none;"></a>Vende en falabella.com</a></li>
+                    <hr class="my-4"> 
+                    <li><a href="#" id="guias-compras-link" style="text-decoration: none;"></a>Guias de compras</a></li>
+                    <li class="mb-4" style="width: 100px;"></li>
+                    <li><a href="#" id="horario-tiendas-link" style="text-decoration: none;"><a>Horario de tiendas</a></a></li>
+                    <li class="mb-4" style="width: 100px; font-size: larger;"></li>
+                    <hr class="my-4">
+                      <img src="{% static 'img/falIconButton.png' %}" alt="falIconButton" width="115" height="10">
+                    
                   </ul>
                 </div>
               </div>
-              <!-- Divider -->
-              <div class="vr mx-3"></div>
-              <!-- Mis compras -->
-              <div class="d-flex align-items-center">
-                <div class="d-flex flex-column" style="line-height: 1;">
-                  <span class="text-dark">Mis</span>
-                  <span class="text-dark fw-bold">compras</span>
+            </div>
+            
+            <!-- Search bar -->
+            <div class="flex-grow-1 mx-4">
+              <div class="input-group">
+                <input class="form-control rounded-pill py-2 bg-transparent" type="search"
+                  placeholder="Buscar en falabella.com" aria-label="Search">
+                <span class="position-absolute top-50 end-0 translate-middle-y me-2 bg-secondary rounded-circle"
+                  style="width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">
+                  <i class="bi bi-search text-white"></i>
+                </span>
+              </div>
+            </div>
+            <!-- Links -->
+            <nav class="navbar p-2">
+              <div class="container-fluid d-flex align-items-center justify-content-between">
+                <!-- Login -->
+                <div class="d-flex flex-column align-items-start" id="loginArea">
+                  <strong class="text-dark mb-0 fs-5">Hola,</strong> <!-- Aumentar el tamaño del texto -->
+                  <div class="d-flex align-items-center">
+                    <strong class="text-dark fs-5 semi-bold-on-hover">Inicia sesión</strong>
+                    <!-- Aumentar el tamaño del texto -->
+                    <i class="bi bi-chevron-down ms-1 fs-5" id="chevronIcon"></i> <!-- Aumentar el tamaño del ícono -->
+                  </div>
+                </div>
+                <!-- Divider -->
+                <div class="vr mx-3"></div>
+                <!-- Mis compras -->
+                <div class="d-flex align-items-center" id="misCompras">
+                  <div class="d-flex flex-column" style="line-height: 1;">
+                    <strong class="text-dark">Mis</strong>
+                    <strong class="text-dark fw-bold">compras</strong>
+                  </div>
                 </div>
                 <!-- Divider -->
                 <div class="vr mx-3"></div>
@@ -142,590 +622,128 @@
                   </span>
                 </div>
               </div>
-            </div>
+            </nav>
           </nav>
-        </nav>
-        <!-- Last Navbar -->
-        <!-- Content -->
-        <!--% block content -->
-        <!--% endblock % -->
-      </div>
-      <!-- Modulo para Rebajas Vestuario -->
-      <div class="modal fade" id="rebajasModal" tabindex="-1" aria-labelledby="rebajasModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="rebajasModalLabel">Rebajas Vestuario</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Descuentos en vestuario.
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Modulo para Tecnología -->
-      <div class="modal fade" id="tecnologiaModal" tabindex="-1" aria-labelledby="tecnologiaModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="tecnologiaModalLabel">Tecnología</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Aquí puedes explorar la última tecnología.
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Modulo para Celulares y accesorios -->
-      <div class="modal fade" id="celularesModal" tabindex="-1" aria-labelledby="celularesModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="celularesModalLabel">Celulares y accesorios</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Aquí puedes explorar los últimos celulares y accesorios.
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Modulo para Electrohogar -->
-      <div class="modal fade" id="electrohogarModal" tabindex="-1" aria-labelledby="electrohogarModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="electrohogarModalLabel">Electrohogar</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Aquí puedes explorar productos de electrohogar.
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Modulo para Moda mujer -->
-      <div class="modal fade" id="modaMujerModal" tabindex="-1" aria-labelledby="modaMujerModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="modaMujerModalLabel">Moda mujer</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Aquí puedes explorar productos de moda para mujer.
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-  
-      <!-- Modulo para Moda hombre -->
-      <div class="modal fade" id="modaHombreModal" tabindex="-1" aria-labelledby="modaHombreModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="modaHombreModalLabel">Moda hombre</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Aquí puedes explorar productos de moda para hombre.
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-  
-      <!-- Modal para Tenis y zapatos -->
-      <div class="modal fade" id="tenisZapatosModal" tabindex="-1" aria-labelledby="tenisZapatosModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="tenisZapatosModalLabel">Tenis y zapatos</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Aquí puedes explorar productos de tenis y zapatos.
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-  
-      <!-- Modal para Belleza y salud -->
-      <div class="modal fade" id="bellezaSaludModal" tabindex="-1" aria-labelledby="bellezaSaludModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="bellezaSaludModalLabel">Belleza y salud</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Aquí puedes explorar productos de belleza y salud.
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-  
-      <!-- Modal para Relojes, gafas, cartera y más -->
-      <div class="modal fade" id="relojesGafasModal" tabindex="-1" aria-labelledby="relojesGafasModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="relojesGafasModalLabel">Relojes, gafas, cartera y más</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Aquí puedes explorar productos de relojes, gafas, cartera y más.
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-  
-      <!-- Modal para Niños y juguetes -->
-      <div class="modal fade" id="ninosJuguetesModal" tabindex="-1" aria-labelledby="ninosJuguetesModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="ninosJuguetesModalLabel">Niños y juguetes</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Aquí puedes explorar productos para niños y juguetes.
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-  
-      <!-- Modal para Moda niños y bebés -->
-      <div class="modal fade" id="modaNinosBebesModal" tabindex="-1" aria-labelledby="modaNinosBebesModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="modaNinosBebesModalLabel">Moda niños y bebés</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Aquí puedes explorar productos de moda para niños y bebés.
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Modal para Muebles y organización -->
-      <div class="modal fade" id="mueblesOrganizacionModal" tabindex="-1" aria-labelledby="mueblesOrganizacionModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="mueblesOrganizacionModalLabel">Muebles y organización</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Aquí puedes explorar productos de muebles y organización.
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-  
-      <!-- Modal para Dormitorio -->
-      <div class="modal fade" id="dormitorioModal" tabindex="-1" aria-labelledby="dormitorioModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="dormitorioModalLabel">Dormitorio</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Aquí puedes explorar productos para el dormitorio.
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-  
-      <!-- Modal para Bebé -->
-      <div class="modal fade" id="bebeModal" tabindex="-1" aria-labelledby="bebeModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="bebeModalLabel">Bebé</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Aquí puedes explorar productos para bebés.
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-  
-      <!-- Modal para Cocina y menaje -->
-      <div class="modal fade" id="cocinaMenajeModal" tabindex="-1" aria-labelledby="cocinaMenajeModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="cocinaMenajeModalLabel">Cocina y menaje</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Aquí puedes explorar productos de cocina y menaje.
-            </div>
-            <div class="modal-footer">
-  
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-  
-      <!-- Modal para Deportes y aire libre -->
-      <div class="modal fade" id="deportesAireLibreModal" tabindex="-1" aria-labelledby="deportesAireLibreModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="deportesAireLibreModalLabel">Deportes y aire libre</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Aquí puedes explorar productos de deportes y aire libre.
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-  
-      <!-- Modal para Decoración e iluminación -->
-      <div class="modal fade" id="decoracionIluminacionModal" tabindex="-1" aria-labelledby="decoracionIluminacionModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="decoracionIluminacionModalLabel">Decoración e iluminación</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Aquí puedes explorar productos de decoración e iluminación.
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-  
-      <!-- Modal para Mascotas -->
-      <div class="modal fade" id="mascotasModal" tabindex="-1" aria-labelledby="mascotasModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="mascotasModalLabel">Mascotas</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Aquí puedes explorar productos para mascotas.
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-  
-      <!-- Modal para Herramientas y maquinaria -->
-      <div class="modal fade" id="herramientasMaquinariaModal" tabindex="-1" aria-labelledby="herramientasMaquinariaModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="herramientasMaquinariaModalLabel">Herramientas y maquinaria</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Aquí puedes explorar productos de herramientas y maquinaria.
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-  
-      <!-- Modal para Jardin y terraza -->
-      <div class="modal fade" id="jardinTerrazaModal" tabindex="-1" aria-labelledby="jardinTerrazaModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="jardinTerrazaModalLabel">Jardin y terraza</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Aquí puedes explorar productos para jardín y terraza.
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-  
-      <!-- Modal para Ferretería y construcción -->
-      <div class="modal fade" id="ferreteriaConstruccionModal" tabindex="-1" aria-labelledby="ferreteriaConstruccionModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="ferreteriaConstruccionModalLabel">Ferretería y construcción</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Aquí puedes explorar productos de ferretería y construcción.
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-  
-      <!-- Modal para Supermercado -->
-      <div class="modal fade" id="supermercadoModal" tabindex="-1" aria-labelledby="supermercadoModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="supermercadoModalLabel">Supermercado</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Aquí puedes explorar productos de supermercado.
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-  
-      <!-- Modal para Automotriz -->
-      <div class="modal fade" id="automotrizModal" tabindex="-1" aria-labelledby="automotrizModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="automotrizModalLabel">Automotriz</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Aquí puedes explorar productos automotrices.
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-  
-      <!-- Modal para Motos -->
-      <div class="modal fade" id="motosModal" tabindex="-1" aria-labelledby="motosModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="motosModalLabel">Motos</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Aquí puedes explorar productos de motos.
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-  
-      <!-- Modal para Baño -->
-      <div class="modal fade" id="banoModal" tabindex="-1" aria-labelledby="banoModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="banoModalLabel">Baño</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Aquí puedes explorar productos para el baño.
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-  
-      <!-- Modal para Emprendedores -->
-      <div class="modal fade" id="emprendedoresModal" tabindex="-1" aria-labelledby="emprendedoresModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="emprendedoresModalLabel">Emprendedores</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Aquí puedes explorar productos para emprendedores.
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-  
-      <!-- Modal para Servicios y experiencias -->
-      <div class="modal fade" id="serviciosExperienciasModal" tabindex="-1" aria-labelledby="serviciosExperienciasModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="serviciosExperienciasModalLabel">Servicios y experiencias</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Aquí puedes explorar servicios y experiencias.
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-  
-      <!-- Modal para Crate&Barrel -->
-      <div class="modal fade" id="crateBarrelModal" tabindex="-1" aria-labelledby="crateBarrelModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="crateBarrelModalLabel">Crate&Barrel</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Aquí puedes explorar productos de Crate&Barrel.
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-  
-      <!-- Modal para Libros, papelería y música -->
-      <div class="modal fade" id="librosPapeleriaMusicaModal" tabindex="-1" aria-labelledby="librosPapeleriaMusicaModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="librosPapeleriaMusicaModalLabel">Libros, papelería y música</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Aquí puedes explorar productos de libros, papelería y música.
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-      <script>
-        document.addEventListener('DOMContentLoaded', function () {
-          var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-          var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-            return new bootstrap.Tooltip(tooltipTriggerEl)
-          })
-          var modals = {
-            'rebajas-link': new bootstrap.Modal(document.getElementById('rebajasModal')),
-            'tecnologia-link': new bootstrap.Modal(document.getElementById('tecnologiaModal')),
-            'celulares-link': new bootstrap.Modal(document.getElementById('celularesModal')),
-            'electrohogar-link': new bootstrap.Modal(document.getElementById('electrohogarModal')),
-            'moda-mujer-link': new bootstrap.Modal(document.getElementById('modaMujerModal')),
-            'moda-hombre-link': new bootstrap.Modal(document.getElementById('modaHombreModal')),
-            'tenis-zapatos-link': new bootstrap.Modal(document.getElementById('tenisZapatosModal')),
-            'belleza-salud-link': new bootstrap.Modal(document.getElementById('bellezaSaludModal')),
-            'relojes-gafas-link': new bootstrap.Modal(document.getElementById('relojesGafasModal')),
-            'ninos-juguetes-link': new bootstrap.Modal(document.getElementById('ninosJuguetesModal')),
-            'moda-ninos-bebes-link': new bootstrap.Modal(document.getElementById('modaNinosBebesModal')),
-            'muebles-organizacion-link': new bootstrap.Modal(document.getElementById('mueblesOrganizacionModal')),
-            'dormitorio-link': new bootstrap.Modal(document.getElementById('dormitorioModal')),
-            'bebe-link': new bootstrap.Modal(document.getElementById('bebeModal')),
-            'cocina-menaje-link': new bootstrap.Modal(document.getElementById('cocinaMenajeModal')),
-            'deportes-aire-libre-link': new bootstrap.Modal(document.getElementById('deportesAireLibreModal')),
-            'decoracion-iluminacion-link': new bootstrap.Modal(document.getElementById('decoracionIluminacionModal')),
-            'mascotas-link': new bootstrap.Modal(document.getElementById('mascotasModal')),
-            'herramientas-maquinaria-link': new bootstrap.Modal(document.getElementById('herramientasMaquinariaModal')),
-            'jardin-terraza-link': new bootstrap.Modal(document.getElementById('jardinTerrazaModal')),
-            'ferreteria-construccion-link': new bootstrap.Modal(document.getElementById('ferreteriaConstruccionModal')),
-            'supermercado-link': new bootstrap.Modal(document.getElementById('supermercadoModal')),
-            'automotriz-link': new bootstrap.Modal(document.getElementById('automotrizModal')),
-            'motos-link': new bootstrap.Modal(document.getElementById('motosModal')),
-            'bano-link': new bootstrap.Modal(document.getElementById('banoModal')),
-            'emprendedores-link': new bootstrap.Modal(document.getElementById('emprendedoresModal')),
-            'servicios-experiencias-link': new bootstrap.Modal(document.getElementById('serviciosExperienciasModal')),
-            'crate-barrel-link': new bootstrap.Modal(document.getElementById('crateBarrelModal')),
-            'libros-papeleria-musica-link': new bootstrap.Modal(document.getElementById('librosPapeleriaMusicaModal'))
-          };
-  
-          Object.keys(modals).forEach(function (id) {
-            var link = document.getElementById(id);
-            link.addEventListener('mouseover', function () {
-              modals[id].show();
+      
+          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"></script>
+          <script>
+            document.addEventListener('DOMContentLoaded', function () {
+              var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+              var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+              });
+      
+              var loginArea = document.getElementById('loginArea');
+              var chevronIcon = document.getElementById('chevronIcon');
+              var popover = new bootstrap.Popover(chevronIcon, {
+                trigger: 'manual',
+                placement: 'bottom',
+                html: true,
+                content: `
+                  <div class="popover-body text-start">
+                    <ul class="list-unstyled m-0">
+                      <li class="mb-3"><a href="#" class="semi-bold-on-hover no-underline" data-bs-toggle="modal" data-bs-target="#loginModal">Inicia sesión</a></li>
+                      <li class="mb-3"><a href="#" class="semi-bold-on-hover no-underline">Regístrate</a></li>
+                      <li class="mb-3"><a href="#" class="semi-bold-on-hover no-underline">Mi cuenta</a></li>
+                      <hr class="my-3">
+                      <li class="mb-3"><a href="#" class="semi-bold-on-hover no-underline">CMR Puntos</a></li>
+                    </ul>
+                  </div>
+                `
+              });
+      
+              loginArea.addEventListener('mouseover', function () {
+                popover.show();
+              });
+      
+              loginArea.addEventListener('mouseleave', function () {
+                setTimeout(function () {
+                  if (!loginArea.matches(':hover') && !document.querySelector('.popover:hover')) {
+                    popover.hide();
+                  }
+                }, 300);
+              });
+      
+              document.addEventListener('click', function (event) {
+                if (!loginArea.contains(event.target) && !document.querySelector('.popover').contains(event.target)) {
+                  popover.hide();
+                }
+              });
             });
-          });
-  
-          var loginDropdown = document.getElementById('loginDropdown');
-          loginDropdown.addEventListener('mouseover', function () {
-            var dropdown = new bootstrap.Dropdown(loginDropdown);
-            dropdown.show();
-          });
-  
-          var rebajasModal = document.getElementById('rebajasModal');
-          rebajasModal.addEventListener('hidden.bs.modal', function () {
-            var menuDropdown = document.getElementById('menuDropdown');
-            var dropdown = new bootstrap.Dropdown(menuDropdown);
-            dropdown.show();
-          });
-        });
-      </script>
-    </body>
-  </html>
+      
+            document.addEventListener('DOMContentLoaded', function () {
+              const menuItems = document.querySelectorAll('.menu-item');
+              let activeSubmenu = null;
+      
+              menuItems.forEach(item => {
+                const submenu = item.querySelector('.submenu');
+      
+                if (submenu) {
+                  item.addEventListener('mouseenter', () => {
+                    // Ocultar submenú anterior si existe y es diferente
+                    if (activeSubmenu && activeSubmenu !== submenu) {
+                      activeSubmenu.style.display = 'none';
+                    }
+                    // Calcular posición y mostrar submenú
+                    const offcanvasBody = document.querySelector('.offcanvas-body');
+                    const bodyTop = offcanvasBody.getBoundingClientRect().top;
+                    submenu.style.top = `${bodyTop}px`;
+                    submenu.style.display = 'block';
+                    activeSubmenu = submenu;
+                  });
+      
+                  // Mantener el submenú visible al hacer hover sobre él
+                  submenu.addEventListener('mouseenter', () => {
+                    submenu.style.display = 'block';
+                  });
+      
+                  // Mantener el submenú visible al hacer hover sobre el menú principal
+                  item.addEventListener('mouseleave', () => {
+                    setTimeout(() => {
+                      if (!submenu.matches(':hover')) {
+                        submenu.style.display = 'none';
+                      }
+                    }, 300);
+                  });
+      
+                  submenu.addEventListener('mouseleave', () => {
+                    setTimeout(() => {
+                      if (!item.matches(':hover')) {
+                        submenu.style.display = 'none';
+                      }
+                    }, 300);
+                  });
+                }
+              });
+            });
+          </script>
+      
+          <!-- Modal de inicio de sesión -->
+          <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="loginModalLabel">Inicia sesión</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="mb-3">
+                      <label for="email" class="form-label">Correo electrónico</label>
+                      <input type="email" class="form-control" id="email" placeholder="nombre@ejemplo.com">
+                    </div>
+                    <div class="mb-3">
+                      <label for="password" class="form-label">Contraseña</label>
+                      <input type="password" class="form-control" id="password" placeholder="Contraseña">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+      </body>
+      
+      </html>
